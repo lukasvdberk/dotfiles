@@ -10,7 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 #Monitor
-exec /home/lukas/Documents/monitorsetup.sh
+exec /home/lukas/.config/i3/monitor_setup.sh
 #Keyboard layout
 exec setxkbmap -layout us
 #De $win is bedoelt voor het starten van applicaties en ander misc
@@ -20,8 +20,8 @@ set $win Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Times New Roman 6
-#font pango:monospace 6
+font pango:Times New Roman 8
+#font pango:monospace 7.5
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -51,9 +51,6 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
@@ -99,8 +96,8 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
-set $monitor2 DVI-I-1
-set $monitor1 HDMI-1
+set $monitor1 eDP1
+set $monitor2 HDMI2
 
 workspace 1:1 output $monitor1
 workspace 2:1 output $monitor1
@@ -222,7 +219,6 @@ client.unfocused            $bgu        $bgu         $bgu
 #Startup applications
 
 #Dit zijn mijn startup applicaitons in verschillende windows
-exec --no-startup-id nohup python3 pythonScriptsForConfig/changeBackground.py 
 exec --no-startup-id redshift-gtk 
 
 exec --no-startup-id i3-msg workspace 1; exec /usr/bin/firefox,move to output $monitor1
@@ -231,28 +227,25 @@ exec --no-startup-id i3-msg workspace 6; gnome-terminal,move to output $monitor2
 #Start gaps (experimental)
 for_window [class="^.*"] border pixel 2
 
-gaps inner 1
-gaps outer -1
+gaps inner 10
+gaps outer 0
 
 #Achtergrond
-exec --no-startup-id feh --bg-scale /home/lukas/Pictures/wallpaper.jpg
+set $background /home/lukas/Pictures/background.png
+
 #Wifi manager op de bar
 exec --no-startup-id nm-applet
 #Voor de nvidia drivers
-exec i3 --force-xinerama -V >>~/.i3/i3log 2>&1
-#Compton display compositor
-#exec_always --no-startup-id compton --config ~/.config/i3/compton.conf
+#exec i3 --force-xinerama -V >>~/.i3/i3log 2>&1
 
+set $transparent #00000000
 bar {
-    #I3Status conf is in ~/.config/i3status/conf
-    #status_command i3status
-    
     status_command python3 ~/.config/i3/i3pystatusconf.py
-    #tray_output primary
+    tray_output primary
     workspace_buttons yes
     colors{
-        background #1b1f3c
-        statusline #DCDCDC
+        background $transparent
+        focused_workspace #CECECE #CECECE #000000
     }
 }
 
@@ -265,17 +258,18 @@ bindsym $win+f exec firefox
 #Verandert volume met 2%
 
 bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
-bindsym XF86AudioLowerVolume exec amixer sset 'Master' 2%-
-bindsym XF86AudioRaiseVolume exec amixer sset 'Master' 2%+
+bindsym XF86AudioLowerVolume exec amixer sset 'Master' 5%-
+bindsym XF86AudioRaiseVolume exec amixer sset 'Master' 5%+
 
 #Start alsamixer om audio device te veranderen of volume per apparaat
 bindsym $win + s exec gnome-terminal -x sh -c 'alsamixer'
 
+set $resize 15
 #Resize windows met keyboard
-bindsym $mod+Ctrl+Right resize shrink width 1 px or 1 ppt
-bindsym $mod+Ctrl+Up resize grow height 1 px or 1 ppt
-bindsym $mod+Ctrl+Down resize shrink height 1 px or 1 ppt
-bindsym $mod+Ctrl+Left resize grow width 1 px or 1 ppt
+bindsym $mod+Ctrl+Right resize shrink width $resize px or $resize ppt
+bindsym $mod+Ctrl+Up resize grow height $resize px or $resize ppt
+bindsym $mod+Ctrl+Down resize shrink height $resize px or $resize ppt
+bindsym $mod+Ctrl+Left resize grow width $resize px or $resize ppt
 
 #Scherm brightness controls
 
@@ -284,7 +278,7 @@ bindsym XF86MonBrightnessDown exec sh /home/lukas/.config/i3/lowerBrightness.sh
 bindsym XF86MonBrightnessUp exec sh /home/lukas/.config/i3/higherBrightness.sh 
 
 #Lockscreen met i3lock
-bindsym $win + L exec i3lock -i /home/lukas/Pictures/Wallpapers/wallpaper-linux.png -t -e -f
+bindsym $win + L exec i3lock -i $background -t -e -f
 
 #Start system monitor
 bindsym Ctrl+Shift+Escape exec gnome-system-monitor
@@ -297,3 +291,15 @@ bindsym $win + T exec thunar
 
 #Start pavucontrol voor sound controllen
 bindsym $win + P exec pavucontrol
+
+#Hier zijn mijn custom keyboard shortcuts
+bindsym $mod+j exec playerctl previous
+bindsym $mod+k exec playerctl play-pause
+bindsym $mod+l exec playerctl next
+
+#Compton display compositor
+exec --no-startup-id compton --config ~/.config/i3/compton.conf -b
+
+#setting background
+exec feh --bg-scale /home/lukas/Pictures/background.png
+
