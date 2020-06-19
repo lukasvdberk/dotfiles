@@ -1,4 +1,5 @@
 from i3pystatus import Status
+from i3pystatus.weather import weathercom
 
 status = Status()
 
@@ -8,30 +9,18 @@ status = Status()
 status.register("clock",
     format="%a %-d %b %X",)
 
-# Shows your CPU temperature, if you have a Intel CPU
-status.register("temp",
-    format="{temp:.0f}°C",)
-
-# The battery monitor has many formatting options, see README for details
-
-# This would look like this, when discharging (or charging)
-# ↓14.22W 56.15% [77.81%] 2h:41m
-# And like this if full:
-# =14.22W 100.0% [91.21%]
-#
-# This would also display a desktop notification (via D-Bus) if the percentage
-# goes below 5 percent while discharging. The block will also color RED.
-# If you don't have a desktop notification demon yet, take a look at dunst:
-#   http://www.knopwob.org/dunst/
-status.register("battery",
-    format="{status}/{consumption:.2f}W {percentage:.2f}% [{percentage_design:.2f}%] {remaining:%E%hh:%Mm}",
-    alert=True,
-    alert_percentage=5,
-    status={
-        "DIS": "↓",
-        "CHR": "↑",
-        "FULL": "=",
-    },)
+# Whether for Haarlem
+status.register('weather',
+    format='Haarlem: {icon}{current_temp}{temp_unit}{update_error}',
+    interval=450,
+    colorize=True,
+    hints={'markup': 'pango'},
+    backend=weathercom.Weathercom(
+        location_code='e96e28312a651fe6c80573480b022674699d0ed8cea50602b66eb3b3d5c07d03',
+        units='metric',
+        update_error='<span color="#ff0000">!</span>',
+    ),
+)
 
 # This would look like this:
 # Discharging 6h:51m
@@ -43,12 +32,25 @@ status.register("battery",
         "DIS":  "Discharging",
         "CHR":  "Charging",
         "FULL": "Bat full",
-    },)
+    },
+    color='#859900'
+)
 
-# Displays whether a DHCP client is running
-status.register("runwatch",
-    name="DHCP",
-    path="/var/run/dhclient*.pid",)
+status.register("ping", 
+    format="ping: {ping} ms",
+    color='#859900'
+)
+
+status.register("mem", 
+    format="RAM: {avail_mem} GiB", 
+    color='#859900',
+    divisor=1073741824
+)
+
+status.register('now_playing',
+    format='{artist}-{title}',
+    color='#002B36'
+)
 
 # Shows the address and up/down state of eth0. If it is up the address is shown in
 # green (the default value of color_up) and the CIDR-address is shown
@@ -57,21 +59,9 @@ status.register("runwatch",
 # (defaults of format_down and color_down)
 #
 status.register("pulseaudio",
-    format="♪{volume}",)
-
-# Shows mpd status
-# Format:
-# Cloud connected▶Reroute to Remain
-status.register("mpd",
-    format="{title}{status}{album}",
-    status={
-        "pause": "▷",
-        "play": "▶",
-        "stop": "◾",
-    },)
-status.register("mem", 
-    format="RAM: {avail_mem} GiB", 
-    color="#FFFFFF", 
-    divisor=1073741824
+    format="♪{volume}",
+    color_unmuted="#002B36"
 )
+
+
 status.run()

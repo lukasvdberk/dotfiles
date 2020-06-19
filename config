@@ -85,8 +85,8 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
-set $monitor1 HDMI-A-0
-set $monitor2 DVI-D-0
+set $monitor1 eDP1
+set $monitor2 HDMI2
 
 workspace 1:1 output $monitor1
 workspace 2:1 output $monitor1
@@ -287,11 +287,13 @@ bindsym $mod+k exec playerctl play-pause
 bindsym $mod+l exec playerctl next
 
 #Compton display compositor
-#exec --no-startup-id compton --config -b
+exec --no-startup-id compton -b
 
 #Monitor setup
 exec --no-startup-id ~/.config/i3/monitor_setup.sh
 
 #setting background
-exec feh --bg-scale /home/lukas/Pictures/background.png
+exec feh --bg-scale ~/Pictures/wallhaven-zmm7mw.png
 
+# Taking screenshots. saves it to clipboard. requires flameshot to be installed
+bindsym $win+Shift+s exec flameshot gui
