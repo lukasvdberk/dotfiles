@@ -41,15 +41,15 @@ status.register("ping",
     color='#859900'
 )
 
+status.register("cpu_usage",
+    format="cpu: {usage:02}%",
+    color='#859900'
+)
+
 status.register("mem", 
     format="RAM: {avail_mem} GiB", 
     color='#859900',
     divisor=1073741824
-)
-
-status.register('now_playing',
-    format='{artist}-{title}',
-    color='#002B36'
 )
 
 # Shows the address and up/down state of eth0. If it is up the address is shown in
@@ -60,8 +60,13 @@ status.register('now_playing',
 #
 status.register("pulseaudio",
     format="♪{volume}",
-    color_unmuted="#002B36"
+    color_unmuted="#0000FF"
 )
 
+status.register('now_playing',
+    format='{artist}-{title}',
+    color='#0000FF'
+)
 
+# Runs the scripts
 status.run()

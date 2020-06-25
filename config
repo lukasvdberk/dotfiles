@@ -27,8 +27,7 @@ font pango:Times New Roman 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
-
+bindsym $mod+Return exec gnome-terminal -- fish
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -210,8 +209,6 @@ client.unfocused            $bgu        $bgu         $bgu
 #Dit zijn mijn startup applicaitons in verschillende windows
 exec --no-startup-id redshift-gtk 
 
-exec --no-startup-id i3-msg workspace 1; exec /usr/bin/firefox,move to output $monitor1
-exec --no-startup-id i3-msg workspace 6; gnome-terminal,move to output $monitor2 
 
 #Start gaps (experimental)
 for_window [class="^.*"] border pixel 2
@@ -227,9 +224,10 @@ exec --no-startup-id nm-applet
 #Voor de nvidia drivers
 #exec i3 --force-xinerama -V >>~/.i3/i3log 2>&1
 
-set $transparent #00000000
+set $transparent #0000006f
 bar {
-    status_command python3 ~/.config/i3/i3pystatusconf.py
+    status_command python3 ~/.config/i3/i3pystatusconf.py && i3bar -t
+    font pango:DejaVu Sans Mono, Icons 8
     tray_output primary
     workspace_buttons yes
     colors{
@@ -238,6 +236,8 @@ bar {
     }
 }
 
+# The polybar. Make sure it is installed.
+#exec_always --no-startup-id ~/.config/polybar/launch.sh
 #Hier zijn mijn custom keyboard shortcuts
 
 #Start firefox
@@ -276,7 +276,7 @@ bindsym Ctrl+Shift+Escape exec gnome-system-monitor
 bindsym $win + I exec gnome-terminal -x sh -c 'nano ~/.config/i3/config'
 
 #Start een filemanager in dit geval thunar
-bindsym $win + T exec thunar
+bindsym $win + T exec gnome-terminal -- ranger
 
 #Start pavucontrol voor sound controllen
 bindsym $win + P exec pavucontrol
@@ -293,7 +293,20 @@ exec --no-startup-id compton -b
 exec --no-startup-id ~/.config/i3/monitor_setup.sh
 
 #setting background
-exec feh --bg-scale ~/Pictures/wallhaven-zmm7mw.png
+exec_always feh --bg-scale ~/Pictures/wallhaven-zmm7mw.png
 
 # Taking screenshots. saves it to clipboard. requires flameshot to be installed
 bindsym $win+Shift+s exec flameshot gui
+
+# Automatische window placement
+assign [class="discord"] 5:2
+assign [class="Discord"] 5:2
+assign [class="nextcloud"] 6
+
+# Autostart applications
+exec discord
+exec nextcloud
+exec workspace 1:1
+exec workspace 1:2
+
+
