@@ -47,10 +47,14 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
+# move with sytle keybindings.
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
@@ -60,7 +64,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+Shift+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -207,7 +211,7 @@ client.unfocused            $bgu        $bgu         $bgu
 #Startup applications
 
 #Dit zijn mijn startup applicaitons in verschillende windows
-exec --no-startup-id redshift-gtk 
+# exec --no-startup-id redshift-gtk 
 
 
 #Start gaps (experimental)
@@ -217,7 +221,7 @@ gaps inner 10
 gaps outer 0
 
 #Achtergrond
-set $background /home/lukas/Pictures/background.png
+set $background /home/lukas/Pictures/backgrounds/i3wm.png
 
 #Wifi manager op de bar
 exec --no-startup-id nm-applet
@@ -250,6 +254,12 @@ bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
 bindsym XF86AudioLowerVolume exec amixer sset 'Master' 5%-
 bindsym XF86AudioRaiseVolume exec amixer sset 'Master' 5%+
 
+
+# Voor laptop. Verhoogd of verlaagd laptop brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+
+
 #Start alsamixer om audio device te veranderen of volume per apparaat
 bindsym $win + s exec gnome-terminal -x sh -c 'alsamixer'
 
@@ -261,10 +271,6 @@ bindsym $mod+Ctrl+Down resize shrink height $resize px or $resize ppt
 bindsym $mod+Ctrl+Left resize grow width $resize px or $resize ppt
 
 #Scherm brightness controls
-
-#De bash file roept het python script op aangezien we dat niet meteen vanuit hier kunnen doen daar staat ook met hoe veel de brightness verhoogt
-bindsym XF86MonBrightnessDown exec sh /home/lukas/.config/i3/lowerBrightness.sh
-bindsym XF86MonBrightnessUp exec sh /home/lukas/.config/i3/higherBrightness.sh 
 
 #Lockscreen met i3lock
 bindsym $win + L exec i3lock -i $background -t -e -f
@@ -282,9 +288,9 @@ bindsym $win + T exec gnome-terminal -- ranger
 bindsym $win + P exec pavucontrol
 
 #Hier zijn mijn custom keyboard shortcuts
-bindsym $mod+j exec playerctl previous
-bindsym $mod+k exec playerctl play-pause
-bindsym $mod+l exec playerctl next
+bindsym $mod+Shift+j exec playerctl previous
+bindsym $mod+Shift+k exec playerctl play-pause
+bindsym $mod+Shift+l exec playerctl next
 
 #Compton display compositor
 exec --no-startup-id compton -b
@@ -293,7 +299,7 @@ exec --no-startup-id compton -b
 exec --no-startup-id ~/.config/i3/monitor_setup.sh
 
 #setting background
-exec_always feh --bg-scale ~/Pictures/wallhaven-zmm7mw.png
+exec_always feh --bg-scale $background
 
 # Taking screenshots. saves it to clipboard. requires flameshot to be installed
 bindsym $win+Shift+s exec flameshot gui
@@ -302,6 +308,7 @@ bindsym $win+Shift+s exec flameshot gui
 assign [class="discord"] 5:2
 assign [class="Discord"] 5:2
 assign [class="nextcloud"] 6
+assign [class="spotify"] 3:1
 
 # Autostart applications
 exec discord
@@ -309,4 +316,5 @@ exec nextcloud
 exec workspace 1:1
 exec workspace 1:2
 
-
+# Foibonacci layout spawner
+for_window [class=".*"] split toggle

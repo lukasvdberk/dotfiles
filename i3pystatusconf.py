@@ -1,8 +1,8 @@
 from i3pystatus import Status
 from i3pystatus.weather import weathercom
 
-status = Status()
-
+#status = Status()
+status = Status(logfile='/tmp/i3pystatus.log')
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
 #                          ^-- calendar week
@@ -10,17 +10,17 @@ status.register("clock",
     format="%a %-d %b %X",)
 
 # Whether for Haarlem
-status.register('weather',
-    format='Haarlem: {icon}{current_temp}{temp_unit}{update_error}',
-    interval=450,
-    colorize=True,
-    hints={'markup': 'pango'},
-    backend=weathercom.Weathercom(
-        location_code='e96e28312a651fe6c80573480b022674699d0ed8cea50602b66eb3b3d5c07d03',
-        units='metric',
-        update_error='<span color="#ff0000">!</span>',
-    ),
-)
+#status.register('weather',
+#    format='{city}: {current_temp}{temp_unit}{update_error}',
+#    interval=900,
+#    colorize=True,
+#    hints={'markup': 'pango'},
+#    backend=weathercom.Weathercom(
+#        location_code='94107:4:US',
+#        units='metric',
+#        update_error='<span color="#ff0000">!</span>',
+#    )
+#)
 
 # This would look like this:
 # Discharging 6h:51m
