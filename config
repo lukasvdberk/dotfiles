@@ -9,8 +9,8 @@ set $win Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Times New Roman 8
-#font pango:monospace 7.5
+# font pango:Times New Roman 8
+font pango:monospace 7.5
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -67,7 +67,7 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+Shift+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+Shift+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -88,8 +88,8 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
-set $monitor1 eDP1
-set $monitor2 HDMI2
+set $monitor1 HDMI-A-0
+set $monitor2 DVI-D-0
 
 workspace 1:1 output $monitor1
 workspace 2:1 output $monitor1
@@ -188,7 +188,7 @@ bindsym $mod+r mode "resize"
 
 #Voor een unfocesedwindow
 set $bgu    #000000
-set $bg     #ffffff
+set $bg     #ccddff
 set $fg     #9f9f9f
 set $hi     #efef8f
 set $ac     #1b1f3c
@@ -218,10 +218,10 @@ client.unfocused            $bgu        $bgu         $bgu
 for_window [class="^.*"] border pixel 2
 
 gaps inner 10
-gaps outer 0
+gaps outer -10
 
 #Achtergrond
-set $background /home/lukas/Pictures/backgrounds/i3wm.png
+set $background /home/lukas/Pictures/backgrounds/mountain-background.jpg
 
 #Wifi manager op de bar
 exec --no-startup-id nm-applet
@@ -231,13 +231,17 @@ exec --no-startup-id nm-applet
 set $transparent #0000006f
 bar {
     status_command python3 ~/.config/i3/i3pystatusconf.py && i3bar -t
-    font pango:DejaVu Sans Mono, Icons 8
+    font pango:DejaVu Sans Mono, Icons 9
     tray_output primary
     workspace_buttons yes
     colors{
         background $transparent
         focused_workspace #CECECE #CECECE #000000
     }
+
+    mode hide
+    hidden_state hide
+    modifier $win
 }
 
 # The polybar. Make sure it is installed.
@@ -299,7 +303,7 @@ exec --no-startup-id compton -b
 exec --no-startup-id ~/.config/i3/monitor_setup.sh
 
 #setting background
-exec_always feh --bg-scale $background
+#exec_always feh --bg-scale $background
 
 # Taking screenshots. saves it to clipboard. requires flameshot to be installed
 bindsym $win+Shift+s exec flameshot gui
@@ -318,3 +322,6 @@ exec workspace 1:2
 
 # Foibonacci layout spawner
 for_window [class=".*"] split toggle
+
+# Set colourscheme automaticlly
+exec_always ~/.local/bin/wal -i $background -q --backend feh
