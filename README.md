@@ -1,8 +1,12 @@
-### Lukas van den Berk i3 config files
-
-I3wm is a window tilling manager for Linux based systems. 
+# My Dotfiles
 This repository contains my config files and some scripts to help me out (mainly for debian based systems).
 
-If you want to learn more about i3 and how to setup go to the following link.
+* Clone the repository in your home folder
+```bash
+cd ~/
+git clone https://github.com/lukasvdberk/dotfiles/ dotfiles
+cd dotfiles
+```
 
-i3 official site: https://i3wm.org/
+Then either run setup.sh (for debian based systems) or arch-install (for off course arch based systems).
+These scripts will install all necceserry packages and move the configs with GNU Stow
