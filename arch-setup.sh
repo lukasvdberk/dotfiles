@@ -40,6 +40,9 @@ npm config set prefix "${HOME}/.npm-packages"
 # set fish default shell
 chsh -s `which fish`
 
+# removing existing configs
+rm -r ~/.config/*
+
 # update configs
 stow config/
 
