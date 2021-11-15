@@ -12,7 +12,7 @@ makepkg -si
 sudo systemctl enable --now snapd.socket
 sudo ln -s /var/lib/snapd/snap /snap
 
-sudo snap install teams-for-linux todoist sptoify discord
+sudo snap install teams-for-linux todoist spotify discord
 sudo snap install code --classic
 sudo snap install discord --classic
 sudo snap install goland --classic
