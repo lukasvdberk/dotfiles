@@ -8,5 +8,5 @@ git clone https://github.com/lukasvdberk/dotfiles/ dotfiles
 cd dotfiles
 ```
 
-Then either run setup.sh (for debian based systems) or arch-install (for off course arch based systems).
+Then either run setup.sh (for debian based systems) or arch-setup (for off course arch based systems).
 These scripts will install all necceserry packages and move the configs with GNU Stow

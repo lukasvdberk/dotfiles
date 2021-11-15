@@ -12,13 +12,14 @@ makepkg -si
 sudo systemctl enable --now snapd.socket
 sudo ln -s /var/lib/snapd/snap /snap
 
-sudo snap install teams-for-linux todoist spotify discord
+sudo snap install teams-for-linux todoist spotify
 sudo snap install code --classic
 sudo snap install discord --classic
 sudo snap install goland --classic
 sudo snap install pycharm-professional --classic
 sudo snap install intellij-idea-ultimate --classic
 sudo snap install webstorm --classic
+sudo snap install datagrip --classic
 
 # for my custom i3 bar
 python3 -m pip install i3pystatus colour psutil dbus-python
@@ -39,3 +40,7 @@ chsh -s `which fish`
 
 # update configs
 stow config/
+
+echo "Done setting up. Rebooting the system in 5 seconds to apply all configurations"
+sleep 5
+sudo reboot
