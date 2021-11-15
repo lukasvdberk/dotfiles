@@ -238,10 +238,6 @@ bar {
         background $transparent
         focused_workspace #CECECE #CECECE #000000
     }
-
-    mode hide
-    hidden_state hide
-    modifier $win
 }
 
 # The polybar. Make sure it is installed.

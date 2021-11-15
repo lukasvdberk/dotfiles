@@ -21,7 +21,7 @@ sudo snap install intellij-idea-ultimate --classic
 sudo snap install webstorm --classic
 
 # for my custom i3 bar
-python3 -m pip install i3pystatus colour psutil
+python3 -m pip install i3pystatus colour psutil dbus-python
 
 # generating colourschmes for my system
 python3 -m pip install --user pywal
@@ -34,6 +34,8 @@ sudo usermod -a -G docker lukas
 mkdir "${HOME}/.npm-packages"
 npm config set prefix "${HOME}/.npm-packages"
 
+# set fish default shell
 chsh -s `which fish`
 
+# update configs
 stow config/
