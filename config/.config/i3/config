@@ -221,7 +221,7 @@ gaps inner 10
 gaps outer -10
 
 #Achtergrond
-set $background /home/lukas/Pictures/backgrounds/mountain-background.jpg
+set $background /home/lukas/.config/i3/spacingout.jpg
 
 #Wifi manager op de bar
 exec --no-startup-id nm-applet
