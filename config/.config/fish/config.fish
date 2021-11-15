@@ -10,9 +10,9 @@ function fish_prompt
     echo -ne '\033k'
     echo -ne $argv
     echo -ne '\033\\'
-    echo -ne $PWD
+    tput setaf 6; echo -ne $PWD
     echo -e ""
-    echo -n \[\$(date +%H:%M:%S)\]\ '$ '
+    echo (date +%H:%M:%S)\>
 end
 
 set NPM_PACKAGES "$HOME/.npm-packages"
