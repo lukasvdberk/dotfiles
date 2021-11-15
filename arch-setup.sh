@@ -4,7 +4,7 @@ sudo pacman -Syu
 sudo pacman -S compton python3 go nodejs npm stow \
 	git feh thunar fish python-pip py3status playerctl arandr flameshot \
 	imagemagick openvpn pavucontrol docker docker-compose gnome-tweaks lxappearance \
-	nextcloud-client vlc virt-manager gnome-terminal
+	nextcloud-client vlc virt-manager gnome-terminal gnome-terminal-transparency
 
 git clone https://aur.archlinux.org/snapd.git
 cd snapd
