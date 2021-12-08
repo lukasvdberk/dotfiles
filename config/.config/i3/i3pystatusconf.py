@@ -1,4 +1,4 @@
-rom i3pystatus import Status
+from i3pystatus import Status
 
 colors = []
 with open('/home/lukas/.cache/wal/colors', 'r') as file:
