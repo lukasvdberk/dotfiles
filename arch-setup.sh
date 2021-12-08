@@ -4,7 +4,7 @@ sudo pacman -Syu
 sudo pacman -S ranger i3-gaps compton python3 go nodejs npm stow \
 	git feh thunar fish python-pip py3status playerctl arandr flameshot \
 	imagemagick openvpn pavucontrol docker docker-compose gnome-tweaks lxappearance \
-	nextcloud-client vlc virt-manager gnome-terminal gnome-terminal-transparency cava
+	nextcloud-client vlc virt-manager gnome-terminal gnome-terminal-transparency cava mpv scrot
 
 git clone https://aur.archlinux.org/snapd.git
 cd snapd
@@ -17,6 +17,7 @@ cd ../
 sudo snap install teams-for-linux todoist spotify
 sudo snap install code --classic
 sudo snap install discord --classic
+sudo snap install spotify
 sudo snap install goland --classic
 sudo snap install pycharm-professional --classic
 sudo snap install intellij-idea-ultimate --classic
