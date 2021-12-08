@@ -9,8 +9,8 @@ set $win Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-# font pango:Times New Roman 8
-font pango:monospace 7.5
+font pango:monospace 6
+#font pango:monospace 7.5
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -36,7 +36,7 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -nb '#000000' -sf '#000000' -sb '#8E8E8E'"--dmenu="dmenu -nb '#000000' -sf '#000000' -sb '#8E8E8E'"
 
 # change focus
 bindsym $mod+semicolon focus right
@@ -88,19 +88,39 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
-set $monitor1 HDMI-A-0
-set $monitor2 DVI-D-0
+#<<<<<<< Updated upstream
+#set $monitor1 eDP1
+#set $monitor2 HDMI2
+#=======
+# Laptop screen with external monitor
+#set $monitor1 eDP-1
+#set $monitor2 HDMI-2
+
+#set $monitor1 DP-1
+#set $monitor2 HDMI-2
+set $monitor1 eDP-1 DP-1
+set $monitor2 HDMI-2
 
 workspace 1:1 output $monitor1
 workspace 2:1 output $monitor1
 workspace 3:1 output $monitor1
 workspace 4:1 output $monitor1
 workspace 5:1 output $monitor1
+workspace 6:1 output $monitor1
+workspace 7:1 output $monitor1
+workspace 8:1 output $monitor1
+workspace 9:1 output $monitor1
+workspace 10:1 output $monitor1
 workspace 1:2 output $monitor2
 workspace 2:2 output $monitor2
 workspace 3:2 output $monitor2
 workspace 4:2 output $monitor2
 workspace 5:2 output $monitor2
+workspace 6:2 output $monitor2
+workspace 7:2 output $monitor2
+workspace 8:2 output $monitor2
+workspace 9:2 output $monitor2
+workspace 10:2 output $monitor2
 
 
 
@@ -110,11 +130,22 @@ bindsym $win+2 workspace 2:1
 bindsym $win+3 workspace 3:1
 bindsym $win+4 workspace 4:1
 bindsym $win+5 workspace 5:1
+bindsym $win+F1 workspace 6:1
+bindsym $win+F2 workspace 7:1
+bindsym $win+F3 workspace 8:1
+bindsym $win+F4 workspace 9:1
+bindsym $win+F5 workspace 10:1
+
 bindsym $mod+1 workspace 1:2
 bindsym $mod+2 workspace 2:2
 bindsym $mod+3 workspace 3:2
 bindsym $mod+4 workspace 4:2
 bindsym $mod+5 workspace 5:2
+bindsym $mod+F1 workspace 6:2
+bindsym $mod+F2 workspace 7:2
+bindsym $mod+F3 workspace 8:2
+bindsym $mod+F4 workspace 9:2
+bindsym $mod+F5 workspace 10:2
 
 # move focused container to workspace
 bindsym $win+Shift+1 move container to workspace 1:1
@@ -122,11 +153,22 @@ bindsym $win+Shift+2 move container to workspace 2:1
 bindsym $win+Shift+3 move container to workspace 3:1
 bindsym $win+Shift+4 move container to workspace 4:1
 bindsym $win+Shift+5 move container to workspace 5:1
+bindsym $win+Shift+F1 move container to workspace 6:1
+bindsym $win+Shift+F2 move container to workspace 7:1
+bindsym $win+Shift+F3 move container to workspace 8:1
+bindsym $win+Shift+F4 move container to workspace 9:1
+bindsym $win+Shift+F5 move container to workspace 10:1
+
 bindsym $mod+Shift+1 move container to workspace 1:2
 bindsym $mod+Shift+2 move container to workspace 2:2
 bindsym $mod+Shift+3 move container to workspace 3:2
 bindsym $mod+Shift+4 move container to workspace 4:2
 bindsym $mod+Shift+5 move container to workspace 5:2
+bindsym $mod+Shift+F1 move container to workspace 6:2
+bindsym $mod+Shift+F2 move container to workspace 7:2
+bindsym $mod+Shift+F3 move container to workspace 8:2
+bindsym $mod+Shift+F4 move container to workspace 9:2
+bindsym $mod+Shift+F5 move container to workspace 10:2
 
 #Deze lijst aan commando's opent workspace op bepaalde monitor die je hierboven kan instellen
 #bindsym $mod+1 exec i3-msg workspace w1, move workspace to output $monitor1
@@ -161,6 +203,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
+set $resizeAmount 100px
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -168,16 +211,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink width $resizeAmount
+        bindsym k resize grow height $resizeAmountt
+        bindsym l resize shrink height $resizeAmount
+        bindsym semicolon resize grow width $resizeAmount
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width $resizeAmountt
+        bindsym Down resize grow height $resizeAmount
+        bindsym Up resize shrink height $resizeAmount
+        bindsym Right resize grow width $resizeAmountt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -188,7 +231,7 @@ bindsym $mod+r mode "resize"
 
 #Voor een unfocesedwindow
 set $bgu    #000000
-set $bg     #ccddff
+set $bg     #ffffff
 set $fg     #9f9f9f
 set $hi     #efef8f
 set $ac     #1b1f3c
@@ -202,8 +245,20 @@ set $rd     #e89393
 # set some nice colors      border     background  text indicator
 client.focused              $bg        $bg         $bg  $bg
 client.unfocused            $bgu        $bgu         $bgu
-#client.focused_inactive     $bgu        $bgu         $ac
-#client.urgent               $rd        $rd         $tx
+client.focused_inactive     $bgu        $bgu         $ac
+client.urgent               $rd       $rd         $tx
+#set_from_resource $fg i3wm.color6 #f0f0f0
+#set_from_resource $bg i3wm.color7 #f0f0f0
+
+# class                 border  backgr. text indicator child_border
+#client.focused          $bg     $bg     $fg  $bg       $bg
+#client.focused_inactive $bg     $bg     $fg  $bg       $bg
+#client.unfocused        $bg     $bg     $fg  $bg       $bg
+#client.urgent           $bg     $bg     $fg  $bg       $bg
+#client.placeholder      $bg     $bg     $fg  $bg       $bg
+
+#client.background       $bg
+
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -215,26 +270,29 @@ client.unfocused            $bgu        $bgu         $bgu
 
 
 #Start gaps (experimental)
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 1
 
-gaps inner 10
-gaps outer -10
+gaps inner 15
+gaps outer 0
 
 #Achtergrond
-set $background /home/lukas/.config/i3/spacingout.jpg
+set $background ~/.config/i3/spacingout.jpg
+smart_gaps on
 
 #Wifi manager op de bar
 exec --no-startup-id nm-applet
 #Voor de nvidia drivers
 #exec i3 --force-xinerama -V >>~/.i3/i3log 2>&1
 
-set $transparent #0000006f
+set $transparent #000000
+
 bar {
     status_command python3 ~/.config/i3/i3pystatusconf.py && i3bar -t
-    font pango:DejaVu Sans Mono, Icons 9
+    font pango:monospace 8
     tray_output primary
     workspace_buttons yes
-    colors{
+    position bottom
+    colors {
         background $transparent
         focused_workspace #CECECE #CECECE #000000
     }
@@ -256,8 +314,8 @@ bindsym XF86AudioRaiseVolume exec amixer sset 'Master' 5%+
 
 
 # Voor laptop. Verhoogd of verlaagd laptop brightness
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 
 #Start alsamixer om audio device te veranderen of volume per apparaat
@@ -273,16 +331,17 @@ bindsym $mod+Ctrl+Left resize grow width $resize px or $resize ppt
 #Scherm brightness controls
 
 #Lockscreen met i3lock
-bindsym $win + L exec i3lock -i $background -t -e -f
+# bindsym $win + L exec i3lock -i $background -t -e -f
+bindsym $win + L exec $HOME/.config/i3/lock.sh
 
 #Start system monitor
 bindsym Ctrl+Shift+Escape exec gnome-system-monitor
 
 #Start de gnome terminal met de i3config in de nano text editor
-bindsym $win + I exec gnome-terminal -x sh -c 'nano ~/.config/i3/config'
+bindsym $win + I exec gnome-terminal fish -c 'nano ~/.config/i3/config'
 
 #Start een filemanager in dit geval thunar
-bindsym $win + T exec gnome-terminal -- ranger
+bindsym $win + T exec thunar
 
 #Start pavucontrol voor sound controllen
 bindsym $win + P exec pavucontrol
@@ -293,10 +352,10 @@ bindsym $mod+Shift+k exec playerctl play-pause
 bindsym $mod+Shift+l exec playerctl next
 
 #Compton display compositor
-exec --no-startup-id compton -b
+exec --no-startup-id compton -b --config ~/.config/i3/compton.conf
 
-#Monitor setup
-exec --no-startup-id ~/.config/i3/monitor_setup.sh
+# Monitor setup
+# exec --no-startup-id ~/.screenlayout/monitor.sh
 
 #setting background
 #exec_always feh --bg-scale $background
@@ -308,16 +367,23 @@ bindsym $win+Shift+s exec flameshot gui
 assign [class="discord"] 5:2
 assign [class="Discord"] 5:2
 assign [class="nextcloud"] 6
-assign [class="spotify"] 3:1
+assign [class="Spotify"] 3:1
+assign [class="Todoist"] 4:1
 
 # Autostart applications
-exec discord
+exec dunst --config ~/.config/dunst/dunstrc
 exec nextcloud
+
 exec workspace 1:1
 exec workspace 1:2
 
+#<<<<<<< Updated upstream
 # Foibonacci layout spawner
 for_window [class=".*"] split toggle
-
+#=======
 # Set colourscheme automaticlly
-exec_always ~/.local/bin/wal -i $background -q --backend feh
+exec_always /home/lukas/.local/bin/wal -i $background -q --backend feh
+
+# Foibonacci layout spawner
+#default_orientation vertical #start in opposite orientation from your monitor
+#for_window [class=".*"] split toggle #toggles split at each new windo
