@@ -6,6 +6,14 @@ sudo pacman -S ranger i3-gaps compton python3 go nodejs npm stow \
 	imagemagick openvpn pavucontrol docker docker-compose gnome-tweaks lxappearance \
 	nextcloud-client vlc virt-manager gnome-terminal gnome-terminal-transparency cava mpv scrot \
         xorg-backlight alsa-utils dunst
+
+git clone https://aur.archlinux.org/yay-git.git
+
+cd yay-git
+makepkg -si
+cd ../
+yay -S networkmanager-wireguard-git
+
 git clone https://aur.archlinux.org/snapd.git
 cd snapd
 makepkg -si
