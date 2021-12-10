@@ -8,7 +8,7 @@ sudo apt upgrade -y
 sudo apt install i3 compton python3 python3-dev golang nodejs \
 	git feh thunar fish i3-gaps py3status playerctl arandr flameshot sudo apt build-dep \
 	imagemagick openvpn pavucontrol docker.io docker-compose gnome-tweaks lxappearance \
-	nextcloud-desktop vlc virt-manager
+	nextcloud-desktop vlc virt-manager rofi
 
 # dependencies for shadow
 sudo apt install gconf2 libgles2-mesa libubsan0 libuv1 libva-glx2
