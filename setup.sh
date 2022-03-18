@@ -4,6 +4,7 @@
 sudo add-apt-repository ppa:kgilmer/speed-ricer
 sudo apt update
 sudo apt upgrade -y
+sudo apt dist-upgrade
 
 sudo apt install i3 compton python3 python3-dev golang nodejs \
 	git feh thunar fish i3-gaps py3status playerctl arandr flameshot sudo apt build-dep \
